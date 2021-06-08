@@ -142,8 +142,8 @@ if __name__ == "__main__":
         if output_dict['detection_scores'][j] > 0.5:
             detected_class = category_index[output_dict['detection_classes'][j]]['name']
             print("detected_class",detected_class)
+            print("desired class",category_index[int(cat[cnt])]['name'])
             if detected_class == category_index[int(cat[cnt])]['name']:
-                print("desired class",category_index[cat[cnt]]['name'])
                 correct = correct + 1
             break
     print("done cnt:",cnt,"correct count",correct)
