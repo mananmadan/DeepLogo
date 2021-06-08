@@ -26,7 +26,7 @@ def create_tf_example(csv, img_dir):
     x1, y1, x2, y2 = list(map(int, csv[1:-1]))
     cls_idx = int(csv[-1])
     cls_text = config.CLASS_NAMES[cls_idx].encode('utf8')
-    with tf.gfile.GFile(os.path.join(img_dir, img_fname), 'rb') as fid:
+    with tf.io.gfile.GFile(os.path.join(img_dir, img_fname), 'rb') as fid:
         encoded_jpg = fid.read()
     encoded_jpg_io = io.BytesIO(encoded_jpg)
     image = Image.open(encoded_jpg_io)
