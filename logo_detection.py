@@ -110,15 +110,14 @@ if __name__ == "__main__":
   test_set_images = data[:, 0]
   print(len(test_set_images))
 
-  PATH_TO_TEST_IMAGES_DIR = args.test_image_dir
-  TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, img) for img in test_set_images]
-
   # Size, in inches, of the output images.
   IMAGE_SIZE = (12, 8)
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
-
+  for i in os.path("imgs/"):
+      print(i)
+  return 0
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
