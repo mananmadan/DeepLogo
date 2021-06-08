@@ -157,7 +157,7 @@ if __name__ == "__main__":
             if detected_class == category_index[int(cat[cnt])+1]['name']:
                 if desired_class not in correct_dict:
                     correct_dict[desired_class] = 1
-                else
+                else:
                     correct_dict[desired_class] = correct_dict[desired_class]+1
                 correct_detect = 1
                 correct = correct + 1
@@ -165,7 +165,7 @@ if __name__ == "__main__":
     if detect == 1 and correct_detect == 0:
         if desired_class not in wrong_dict:
             wrong_dict[desired_class] = 1
-        else
+        else:
             wrong_dict[desired_class] = wrong_dict[desired_class]+1
         FP = FP + 1
     if detect == 0:
