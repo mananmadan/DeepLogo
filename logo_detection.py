@@ -141,7 +141,7 @@ if __name__ == "__main__":
     cnt = 0;
     for j in output_dict['detection_classes']:
         if output_dict['detection_scores'][cnt] > 0.5:
-            print(classes[j]['name'])
+            print(category[j]['name'])
         cnt = cnt + 1
 
     vis_util.visualize_boxes_and_labels_on_image_array(
