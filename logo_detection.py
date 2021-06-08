@@ -140,7 +140,7 @@ if __name__ == "__main__":
         # Visualization of the results of a detection.
     print(output_dict['detection_scores'])
     print(output_dict['detection_classes'])
-    print(category_undex)
+    print(category_index)
     vis_util.visualize_boxes_and_labels_on_image_array(
         image_np,
         output_dict['detection_boxes'],
