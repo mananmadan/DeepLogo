@@ -147,5 +147,7 @@ if __name__ == "__main__":
         instance_masks=output_dict.get('detection_masks'),
         use_normalized_coordinates=True,
         line_thickness=8)
+    plt.figure(figsize=IMAGE_SIZE)
+    plt.imshow(image_np)
     plt.savefig(os.path.join(args.output_dir, 'detect_results_' + i))
 
