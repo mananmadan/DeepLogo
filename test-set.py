@@ -127,9 +127,13 @@ if __name__ == "__main__":
   print(category_index[19])
   cnt = 0
   correct = 0
+  FP = 0
+  FN = 0
+  
   for i in category_index:
       print(i,category_index[i])
-
+  correct_dict = {}
+  wrong_dict = {}
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
@@ -140,16 +144,41 @@ if __name__ == "__main__":
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
-
+    detect = 0
+    correct_detect = 0
     print("desired class",category_index[int(cat[cnt])+1]['name'])
+    desired_class = category_index[int(cat[cnt])+1]['name']
     for j in range(0,len(output_dict['detection_classes'])):
         if output_dict['detection_scores'][j] > 0.5:
+            detect = 1
             detected_class = category_index[output_dict['detection_classes'][j]]['name']
             print("detected_class",detected_class)
             #print("checking cat index:",int(cat[cnt])+1)
             if detected_class == category_index[int(cat[cnt])+1]['name']:
+                if desired_class not in correct_dict:
+                    correct_dict[desired_class] = 1
+                else
+                    correct_dict[desired_class] = correct_dict[desired_class]+1
+                correct_detect = 1
                 correct = correct + 1
-            break
+                break
+    if detect == 1 and correct_detect == 0:
+        if desired_class not in wrong_dict:
+            wrong_dict[desired_class] = 1
+        else
+            wrong_dict[desired_class] = wrong_dict[desired_class]+1
+        FP = FP + 1
+    if detect == 0:
+        FN = FN + 1
     print("done cnt:",cnt,"correct count",correct)
     cnt = cnt + 1
     print("correct percentage:",correct/len(cat))
+    print("false negative:",FN)
+    print("false positive:",FP)
+
+print("wrong_dict")
+for i in wrong_dict:
+    print(i,wrong_dict[i])
+print("correct_dict")
+for i in correct_dict:
+    print(i,correct_dict[i])
