@@ -110,10 +110,10 @@ if __name__ == "__main__":
   print(data)
   cat = data[:,-1]
   test_set_images = data[:, 0]
-  print(test_set_images)
-  print("cat data:",cat)
-  print(len(cat))
-  print(len(test_set_images))
+  for i in test_set_images:
+      print(i),print(","),
+
+  quit()
 
   PATH_TO_TEST_IMAGES_DIR = args.test_image_dir
   TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, img) for img in test_set_images]
@@ -123,15 +123,7 @@ if __name__ == "__main__":
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
-  print(category_index[18])
-  print(category_index[19])
-  cnt = 0
-  correct = 0
-  FP = 0
-  FN = 0
   
-  for i in category_index:
-      print(i,category_index[i])
   correct_dict = {}
   wrong_dict = {}
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
