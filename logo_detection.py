@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+!/usr/bin/env python
 # coding: utf-8
 
 import numpy as np
@@ -34,12 +34,13 @@ def parse_arguments():
   parser.add_argument('--test_image_dir', required=True, help='Path to test image directory')
   parser.add_argument('--output_dir', required=True, help='Path to output directory')
   return parser.parse_args()
-'''
-def load_image_into_numpy_array(image):
-  (im_width, im_height) = image.size
-  return np.array(image.getdata()).reshape(
-      (im_height, im_width, 3)).astype(np.uint8)
-'''
+
+#def load_image_into_numpy_array(image):
+#  (im_width, im_height) = image.size
+#  return np.array(image.getdata()).reshape(
+#      (im_height, im_width, 3)).astype(np.uint8)
+
+
 ##new load function
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
