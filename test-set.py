@@ -111,7 +111,7 @@ if __name__ == "__main__":
   cat = data[:,-1]
   test_set_images = data[:, 0]
   for i in test_set_images:
-      print(i,end = ""),
+      print(i,end = ","),
 
   quit()
 
