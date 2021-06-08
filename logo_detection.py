@@ -139,7 +139,7 @@ if __name__ == "__main__":
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
         # Visualization of the results of a detection.
     cnt = 0;
-    for i in output_dict['detection_classes']:
+    for j in output_dict['detection_classes']:
         if output_dict['detection_scores'][cnt] > 0.5:
             print(output_dict['detection_scores'][cnt])
         cnt = cnt + 1
