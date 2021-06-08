@@ -128,7 +128,7 @@ if __name__ == "__main__":
   cnt = 0
   correct = 0
   for i in category_index:
-      print(i)
+      print(i,category_index[i])
 
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
