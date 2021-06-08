@@ -116,9 +116,7 @@ if __name__ == "__main__":
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
   for i in os.listdir("imgs/"):
-      print(i)
-  quit()
-  for i, image_path in enumerate(TEST_IMAGE_PATHS):
+    image_path = "imgs/"+i
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
@@ -139,5 +137,5 @@ if __name__ == "__main__":
         line_thickness=8)
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
-    plt.savefig(os.path.join(args.output_dir, 'detect_results_' + str(i).zfill(3) + '.png'))
+    plt.savefig(os.path.join(args.output_dir, 'detect_results_' + i))
 
