@@ -134,20 +134,19 @@ if __name__ == "__main__":
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
-    if cnt == 5:
-        quit()
     image_np = load_image_into_numpy_array(image)
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
     image_np_expanded = np.expand_dims(image_np, axis=0)
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
+
+    print("desired class",category_index[int(cat[cnt])+1]['name'])
     for j in range(0,len(output_dict['detection_classes'])):
         if output_dict['detection_scores'][j] > 0.5:
             detected_class = category_index[output_dict['detection_classes'][j]]['name']
             print("detected_class",detected_class)
-            print("checking cat index:",int(cat[cnt])+1)
-            print("desired class",category_index[int(cat[cnt])+1]['name'])
+            #print("checking cat index:",int(cat[cnt])+1)
             if detected_class == category_index[int(cat[cnt])+1]['name']:
                 correct = correct + 1
             break
