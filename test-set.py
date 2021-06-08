@@ -130,6 +130,8 @@ if __name__ == "__main__":
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
+    if done == 5:
+        quit()
     image_np = load_image_into_numpy_array(image)
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
     image_np_expanded = np.expand_dims(image_np, axis=0)
@@ -139,7 +141,9 @@ if __name__ == "__main__":
     for j in range(0,len(output_dict['detection_classes'])):
         if output_dict['detection_scores'][j] > 0.5:
             detected_class = category_index[output_dict['detection_classes'][j]]['name']
-            if detected_class == cat[0]:
+            print("detected_class",detected_class)
+            if detected_class == category_index[cat[cnt]]['name']:
+                print("desired class",category_index[cat[cnt]]['name'])
                 correct = correct + 1
             break
     print("done cnt:",cnt,"correct count",correct)
