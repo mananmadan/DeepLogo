@@ -114,7 +114,6 @@ if __name__ == "__main__":
   print("cat data:",cat)
   print(len(cat))
   print(len(test_set_images))
-  quit()
 
   PATH_TO_TEST_IMAGES_DIR = args.test_image_dir
   TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, img) for img in test_set_images]
@@ -126,27 +125,23 @@ if __name__ == "__main__":
     os.makedirs(args.output_dir)
   
   cnt = 0
+  correct = 0
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
-    print("cnt:",cnt)
-    cnt = cnt + 1
     image_np = load_image_into_numpy_array(image)
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
     image_np_expanded = np.expand_dims(image_np, axis=0)
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
-    vis_util.visualize_boxes_and_labels_on_image_array(
-        image_np,
-        output_dict['detection_boxes'],
-        output_dict['detection_classes'],
-        output_dict['detection_scores'],
-        category_index,
-        instance_masks=output_dict.get('detection_masks'),
-        use_normalized_coordinates=True,
-        line_thickness=8)
-    plt.figure(figsize=IMAGE_SIZE)
-    plt.imshow(image_np)
-    plt.savefig(os.path.join(args.output_dir, 'detect_results_' + str(i).zfill(3) + '.png'))
+    for j in len(0,output_dict['detection_classes']):
+        if output_dict['detection_scores'] > 0.5:
+            detected_class = category_index[j]['name']
+            if detected_class == cat[0]:
+                correct = correct + 1
+            break
+    print("done cnt:",cnt,"correct count",correct)
+    cnt = cnt + 1
+    print("correct percentage:",correct/len(cat))
