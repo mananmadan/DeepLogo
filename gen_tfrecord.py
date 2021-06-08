@@ -64,7 +64,7 @@ if __name__ == "__main__":
     args = parse_arguments()
     train_or_test = args.train_or_test.lower()
 
-    writer = tf.python_io.TFRecordWriter(args.output_path)
+    writer = tf.io.TFRecordWriter(args.output_path)
     csvs = np.loadtxt(args.csv_input, dtype=str, delimiter=',')
     img_fnames = set()
     num_data = 0
