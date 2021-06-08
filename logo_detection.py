@@ -44,9 +44,9 @@ def parse_arguments():
 ##new load function
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
-    print(image.getdata().mode)
     if image.getdata().mode != "RGB":
         image = image.convert('RGB')
+    print(image.getdata().mode)
     np_array = np.array(image.getdata())
     reshaped = np_array.reshape((im_height, im_width, 3))
     return reshaped.astype(np.uint8)
