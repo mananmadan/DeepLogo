@@ -138,7 +138,7 @@ if __name__ == "__main__":
     # Visualization of the results of a detection.
     for j in range(0,len(output_dict['detection_classes'])):
         if output_dict['detection_scores'][j] > 0.5:
-            detected_class = category_index[j]['name']
+            detected_class = category_index[output_dict['detection_classes'][j]]['name']
             if detected_class == cat[0]:
                 correct = correct + 1
             break
