@@ -108,6 +108,8 @@ if __name__ == "__main__":
 
   data = np.loadtxt(args.test_annot_text, delimiter=',', dtype=str)
   test_set_images = data[:, 0]
+  print(test_set_images)
+  quit()
   print(len(test_set_images))
 
   PATH_TO_TEST_IMAGES_DIR = args.test_image_dir
@@ -118,11 +120,13 @@ if __name__ == "__main__":
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
-
+  cnt = 0
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
+    print("cnt:",cnt)
+    cnt = cnt + 1
     image_np = load_image_into_numpy_array(image)
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
     image_np_expanded = np.expand_dims(image_np, axis=0)
