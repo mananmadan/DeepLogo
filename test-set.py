@@ -123,7 +123,8 @@ if __name__ == "__main__":
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
-  
+  print(category_index[18])
+  print(category_index[19])
   cnt = 0
   correct = 0
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
