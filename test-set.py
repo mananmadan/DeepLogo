@@ -108,8 +108,10 @@ if __name__ == "__main__":
 
   data = np.loadtxt(args.test_annot_text, delimiter=',', dtype=str)
   print(data)
+  cat = data[:,-1]
   test_set_images = data[:, 0]
   print(test_set_images)
+  print("cat data:",cat)
   quit()
   print(len(test_set_images))
 
