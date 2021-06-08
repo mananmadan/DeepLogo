@@ -117,6 +117,7 @@ if __name__ == "__main__":
     os.makedirs(args.output_dir)
   for i in os.listdir("imgs/"):
     image_path = "imgs/"+i
+    print("opening image ..",image_path)
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
