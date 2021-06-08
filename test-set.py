@@ -107,6 +107,7 @@ if __name__ == "__main__":
     PATH_TO_LABELS, use_display_name=True)
 
   data = np.loadtxt(args.test_annot_text, delimiter=',', dtype=str)
+  print(data)
   test_set_images = data[:, 0]
   print(test_set_images)
   quit()
@@ -120,6 +121,7 @@ if __name__ == "__main__":
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
+  
   cnt = 0
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
