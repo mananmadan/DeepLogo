@@ -112,8 +112,9 @@ if __name__ == "__main__":
   test_set_images = data[:, 0]
   print(test_set_images)
   print("cat data:",cat)
-  quit()
+  print(len(cat))
   print(len(test_set_images))
+  quit()
 
   PATH_TO_TEST_IMAGES_DIR = args.test_image_dir
   TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, img) for img in test_set_images]
