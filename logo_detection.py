@@ -45,7 +45,7 @@ def parse_arguments():
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
     print(image.getdata().mode)
-    if image.getdata().mode == "RGBA":
+    if image.getdata().mode != "RGB":
         image = image.convert('RGB')
     np_array = np.array(image.getdata())
     reshaped = np_array.reshape((im_height, im_width, 3))
