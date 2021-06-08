@@ -118,16 +118,17 @@ if __name__ == "__main__":
   for i in os.listdir("imgs/"):
     image_path = "imgs/"+i
     print("opening image ..",image_path)
-    image = Image.open(image_path)
-    # the array based representation of the image will be used later in order to prepare the
-    # result image with boxes and labels on it.
-    image_np = load_image_into_numpy_array(image)
-    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-    image_np_expanded = np.expand_dims(image_np, axis=0)
-    # Actual detection.
-    output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
-    # Visualization of the results of a detection.
-    vis_util.visualize_boxes_and_labels_on_image_array(
+    try:
+        image = Image.open(image_path)
+        # the array based representation of the image will be used later in order to prepare the
+        # result image with boxes and labels on it.
+        image_np = load_image_into_numpy_array(image)
+        # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+        image_np_expanded = np.expand_dims(image_np, axis=0)
+        # Actual detection.
+        output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
+        # Visualization of the results of a detection.
+        vis_util.visualize_boxes_and_labels_on_image_array(
         image_np,
         output_dict['detection_boxes'],
         output_dict['detection_classes'],
@@ -136,7 +137,9 @@ if __name__ == "__main__":
         instance_masks=output_dict.get('detection_masks'),
         use_normalized_coordinates=True,
         line_thickness=8)
-    plt.figure(figsize=IMAGE_SIZE)
-    plt.imshow(image_np)
-    plt.savefig(os.path.join(args.output_dir, 'detect_results_' + i))
+        plt.figure(figsize=IMAGE_SIZE)
+        plt.imshow(image_np)
+        plt.savefig(os.path.join(args.output_dir, 'detect_results_' + i))
+    except:
+        print("error while running for .. ",image_path)
 
