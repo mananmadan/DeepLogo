@@ -121,6 +121,7 @@ if __name__ == "__main__":
     image = Image.open(image_path)
         # the array based representation of the image will be used later in order to prepare the
         # result image with boxes and labels on it.
+    print(image.shape)
     image_np = load_image_into_numpy_array(image)
         # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
     image_np_expanded = np.expand_dims(image_np, axis=0)
