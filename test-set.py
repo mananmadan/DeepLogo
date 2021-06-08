@@ -137,7 +137,7 @@ if __name__ == "__main__":
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
     for j in range(0,len(output_dict['detection_classes'])):
-        if output_dict['detection_scores'] > 0.5:
+        if output_dict['detection_scores'][j] > 0.5:
             detected_class = category_index[j]['name']
             if detected_class == cat[0]:
                 correct = correct + 1
