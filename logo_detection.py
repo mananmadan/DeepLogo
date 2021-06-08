@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
-  for i in os.path("imgs/"):
+  for i in os.listdir("imgs/"):
       print(i)
   quit()
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
