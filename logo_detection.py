@@ -138,9 +138,12 @@ if __name__ == "__main__":
         # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
         # Visualization of the results of a detection.
-    print(output_dict['detection_scores'])
-    print(output_dict['detection_classes'])
-    print(category_index)
+    cnt = 0;
+    for i in output_dict['detection_classes']:
+        if output_dict['detection_scores'][cnt] > 0.5:
+            print(output_dict['detection_scores'][cnt])
+        cnt = cnt + 1
+
     vis_util.visualize_boxes_and_labels_on_image_array(
         image_np,
         output_dict['detection_boxes'],
