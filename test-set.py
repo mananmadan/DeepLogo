@@ -125,6 +125,7 @@ if __name__ == "__main__":
   
   correct_dict = {}
   wrong_dict = {}
+  cnt = 0
   for i, image_path in enumerate(TEST_IMAGE_PATHS):
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
