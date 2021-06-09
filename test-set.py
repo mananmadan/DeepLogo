@@ -154,6 +154,7 @@ if __name__ == "__main__":
     print("detected_class",detected_class,"max score",maximum)
     if detected_class == category_index[int(cat[cnt])+1]['name']:
         if desired_class not in correct_dict:
+             correct = correct+1
              correct_dict[desired_class] = 1
         else:
              correct_dict[desired_class] = correct_dict[desired_class]+1
