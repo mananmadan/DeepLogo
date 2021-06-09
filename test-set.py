@@ -110,10 +110,9 @@ if __name__ == "__main__":
   print(data)
   cat = data[:,-1]
   test_set_images = data[:, 0]
-  for i in test_set_images:
-      print("\""+ i + "\"",end = ",")
+  #for i in test_set_images:
+  #    print("\""+ i + "\"",end = ",")
 
-  quit()
 
   PATH_TO_TEST_IMAGES_DIR = args.test_image_dir
   TEST_IMAGE_PATHS = [os.path.join(PATH_TO_TEST_IMAGES_DIR, img) for img in test_set_images]
