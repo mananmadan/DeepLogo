@@ -158,16 +158,19 @@ if __name__ == "__main__":
              correct_dict[desired_class] = 1
         else:
              correct_dict[desired_class] = correct_dict[desired_class]+1
-             correct_detect = 1
              correct = correct + 1
+        correct_detect = 1
+
     if detect == 1 and correct_detect == 0:
         if desired_class not in wrong_dict:
             wrong_dict[desired_class] = 1
         else:
             wrong_dict[desired_class] = wrong_dict[desired_class]+1
         FP = FP + 1
+
     if detect == 0:
         FN = FN + 1
+
     print("done cnt:",cnt,"correct count",correct)
     cnt = cnt + 1
     print("correct percentage:",correct/len(cat))
