@@ -143,20 +143,23 @@ if __name__ == "__main__":
     correct_detect = 0
     print("desired class",category_index[int(cat[cnt])+1]['name'])
     desired_class = category_index[int(cat[cnt])+1]['name']
+    maximum = 0.0
+    detected_class = ""
     for j in range(0,len(output_dict['detection_classes'])):
-        if output_dict['detection_scores'][j] > 0.5:
+        if output_dict['detection_scores'][j] > maximum:
             detect = 1
             detected_class = category_index[output_dict['detection_classes'][j]]['name']
-            print("detected_class",detected_class)
+            maximum = output_dict['detection_scores'][j] 
             #print("checking cat index:",int(cat[cnt])+1)
-            if detected_class == category_index[int(cat[cnt])+1]['name']:
-                if desired_class not in correct_dict:
-                    correct_dict[desired_class] = 1
-                else:
-                    correct_dict[desired_class] = correct_dict[desired_class]+1
-                correct_detect = 1
-                correct = correct + 1
-                break
+    print("detected_class",detected_class,"max score",maximum)
+    if detected_class == category_index[int(cat[cnt])+1]['name']:
+        if desired_class not in correct_dict:
+             correct_dict[desired_class] = 1
+        else:
+             correct_dict[desired_class] = correct_dict[desired_class]+1
+             correct_detect = 1
+             correct = correct + 1
+             break
     if detect == 1 and correct_detect == 0:
         if desired_class not in wrong_dict:
             wrong_dict[desired_class] = 1
