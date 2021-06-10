@@ -117,5 +117,4 @@ def main(model_name,label_map,path):
   else:
       file_dict[detected] = 1
   #print("saving at",str(args.output_dir) + detected + str(file_dict[detected])+".jpg")
-  print("class name:",detected)
   return (detected,mx)
