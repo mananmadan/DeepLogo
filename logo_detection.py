@@ -146,7 +146,8 @@ if __name__ == "__main__":
             mx = output_dict['detection_scores'][cnt]
             detected = category_index[j+1]['name']
         cnt = cnt + 1
-    cv2_imshow(image_path)
+    img = cv2.imread(image_path)
+    cv2_imshow(img)
     print("class_name:",detected)
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
