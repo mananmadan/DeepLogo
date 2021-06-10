@@ -147,6 +147,5 @@ if __name__ == "__main__":
             detected = category_index[j+1]['name']
         cnt = cnt + 1
     print("class name:",detected)
-    img = plt.imread(image_path)
-    plt.imshow(img)
-    plt.show()
+    img = cv2.imread(image_path)
+    cv2_imshow(img)
