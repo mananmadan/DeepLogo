@@ -143,7 +143,7 @@ if __name__ == "__main__":
     detected = ""
     for j in output_dict['detection_classes']:
         if output_dict['detection_scores'][cnt] > mx:
-            mx = output_dict['detection_Scores'][cnt]
+            mx = output_dict['detection_scores'][cnt]
             detected = category_index[j]['name']
         cnt = cnt + 1
     print(detected)
