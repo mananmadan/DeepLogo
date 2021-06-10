@@ -117,9 +117,9 @@ if __name__ == "__main__":
   category_index = label_map_util.create_category_index_from_labelmap(
     PATH_TO_LABELS, use_display_name=True)
 
-  data = np.loadtxt(args.test_annot_text, delimiter=',', dtype=str)
-  test_set_images = data[:, 0]
-  print(len(test_set_images))
+  #data = np.loadtxt(args.test_annot_text, delimiter=',', dtype=str)
+  #test_set_images = data[:, 0]
+  #print(len(test_set_images))
 
   # Size, in inches, of the output images.
   IMAGE_SIZE = (12, 8)
