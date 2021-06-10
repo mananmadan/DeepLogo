@@ -30,7 +30,7 @@ def parse_arguments():
   parser = argparse.ArgumentParser()
   parser.add_argument('--model_name', required=True, help='Path to model')
   parser.add_argument('--label_map', required=True, help='Path to label map text')
-  parser.add_argument('--test_annot_text', required=True, help='Path to test annotation text')
+  parser.add_argument('--test_annot_text', required=False, help='Path to test annotation text')
   parser.add_argument('--test_image_dir', required=True, help='Path to test image directory')
   parser.add_argument('--output_dir', required=True, help='Path to output directory')
   return parser.parse_args()
