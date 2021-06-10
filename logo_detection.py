@@ -126,6 +126,7 @@ if __name__ == "__main__":
 
   if not os.path.exists(os.path.abspath(args.output_dir)):
     os.makedirs(args.output_dir)
+  file_dict = {}
   for i in os.listdir("imgs/"):
     image_path = "imgs/"+i
     #print("opening image ..",image_path)
@@ -146,7 +147,10 @@ if __name__ == "__main__":
             mx = output_dict['detection_scores'][cnt]
             detected = category_index[j+1]['name']
         cnt = cnt + 1
-
+    img = cv2.imread(image_path)
+    if detected in file_dict:
+        file_dict[detected] = file_dict[detected] + 1
+    else
+        file_dict[detected] = 1
+    cv2.imwrite(str(args.output_dir) + detected + str(file_dict[detected])+".jpg",img)
     print("class name:",detected)
-    plt.imshow(image)
-    plt.show()
