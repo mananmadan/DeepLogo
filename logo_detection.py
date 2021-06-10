@@ -150,4 +150,4 @@ if __name__ == "__main__":
     print("class name:",detected)
     img = cv2.imread(image_path)
     cv2_imshow(img)
-    cv2.imshow(img)
+    cv2.imshow("win",img)
