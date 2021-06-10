@@ -145,7 +145,7 @@ if __name__ == "__main__":
     for j in output_dict['detection_classes']:
         if output_dict['detection_scores'][cnt] > mx:
             mx = output_dict['detection_scores'][cnt]
-            detected = category_index[j+1]['name']
+            detected = category_index[j]['name']
         cnt = cnt + 1
     img = cv2.imread(image_path)
     if detected in file_dict:
