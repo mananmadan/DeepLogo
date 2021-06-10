@@ -149,6 +149,5 @@ if __name__ == "__main__":
 
     print("class name:",detected)
     img = cv2.imread(image_path
-    print("Type:")
     print(type(img))
     cv2_imshow(img)
