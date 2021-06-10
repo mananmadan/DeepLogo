@@ -9,7 +9,7 @@ import tarfile
 import tensorflow.compat.v1 as tf
 import zipfile
 import cv2
-
+from google.colab.patches import cv2_imshow
 from distutils.version import StrictVersion
 from collections import defaultdict
 from io import StringIO
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     os.makedirs(args.output_dir)
   for i in os.listdir("imgs/"):
     image_path = "imgs/"+i
-    print("opening image ..",image_path)
+    #print("opening image ..",image_path)
     image = Image.open(image_path)
         # the array based representation of the image will be used later in order to prepare the
         # result image with boxes and labels on it.
@@ -144,9 +144,10 @@ if __name__ == "__main__":
     for j in output_dict['detection_classes']:
         if output_dict['detection_scores'][cnt] > mx:
             mx = output_dict['detection_scores'][cnt]
-            detected = category_index[j]['name']
+            detected = category_index[j+1]['name']
         cnt = cnt + 1
-    print(detected)
+    cv2_imshow(image_path)
+    print("class_name:",detected)
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
     plt.savefig(os.path.join(args.output_dir, 'detect_results_' + i))
