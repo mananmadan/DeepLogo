@@ -152,5 +152,6 @@ if __name__ == "__main__":
         file_dict[detected] = file_dict[detected] + 1
     else:
         file_dict[detected] = 1
+    print("saving at",str(args.output_dir) + detected + str(file_dict[detected])+".jpg")
     cv2.imwrite(str(args.output_dir) + detected + str(file_dict[detected])+".jpg",img)
     print("class name:",detected)
