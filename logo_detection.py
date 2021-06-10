@@ -150,7 +150,7 @@ if __name__ == "__main__":
     img = cv2.imread(image_path)
     if detected in file_dict:
         file_dict[detected] = file_dict[detected] + 1
-    else
+    else:
         file_dict[detected] = 1
     cv2.imwrite(str(args.output_dir) + detected + str(file_dict[detected])+".jpg",img)
     print("class name:",detected)
