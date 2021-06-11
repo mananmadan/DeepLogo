@@ -75,7 +75,6 @@ def run_inference_for_single_image(image, graph):
   return output_dict
 
 def main(model_name,label_map,path):
-  print("here")
   MODEL_NAME = model_name
   # Path to frozen detection graph. This is the actual model that is used for the object detection.
   PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
@@ -100,23 +99,16 @@ def main(model_name,label_map,path):
       # result image with boxes and labels on it.
   mx = 0
   detected = ""
-  print("initialised")
-  print("starting loop")
-  for i in range(0,4):
-    print("i:",i)
-    print("rotated image")
-    image = image.transpose(Image.ROTATE_90)
-    image_np = load_image_into_numpy_array(image)
-      # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-    image_np_expanded = np.expand_dims(image_np, axis=0)
-      # Actual detection.
-    output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
-      # Visualization of the results of a detection.
-    cnt = 0
-    for j in output_dict['detection_classes']:
-      if output_dict['detection_scores'][cnt] > mx:
-          mx = output_dict['detection_scores'][cnt]
-          detected = category_index[j]['name']
-      cnt = cnt + 1
-  #print("saving at",str(args.output_dir) + detected + str(file_dict[detected])+".jpg")
+  image_np = load_image_into_numpy_array(image)
+    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+  image_np_expanded = np.expand_dims(image_np, axis=0)
+    # Actual detection.
+  output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
+    # Visualization of the results of a detection.
+  cnt = 0
+  for j in output_dict['detection_classes']:
+    if output_dict['detection_scores'][cnt] > mx:
+        mx = output_dict['detection_scores'][cnt]
+        detected = category_index[j]['name']
+    cnt = cnt + 1
   return (detected,mx)
