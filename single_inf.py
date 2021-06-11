@@ -97,24 +97,21 @@ def main(model_name,label_map,path):
   image = Image.open(image_path)
       # the array based representation of the image will be used later in order to prepare the
       # result image with boxes and labels on it.
-  image_np = load_image_into_numpy_array(image)
+  for i in range(0,4):
+    image = image.transpose(Image.ROTATE_90)
+    image_np = load_image_into_numpy_array(image)
       # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-  image_np_expanded = np.expand_dims(image_np, axis=0)
+    image_np_expanded = np.expand_dims(image_np, axis=0)
       # Actual detection.
-  output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
+    output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
       # Visualization of the results of a detection.
-  cnt = 0
-  mx = 0
-  detected = ""
-  for j in output_dict['detection_classes']:
+    cnt = 0
+    mx = 0
+    detected = ""
+    for j in output_dict['detection_classes']:
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
           detected = category_index[j]['name']
       cnt = cnt + 1
-  img = cv2.imread(image_path)
-  if detected in file_dict:
-      file_dict[detected] = file_dict[detected] + 1
-  else:
-      file_dict[detected] = 1
   #print("saving at",str(args.output_dir) + detected + str(file_dict[detected])+".jpg")
   return (detected,mx)
