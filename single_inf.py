@@ -98,6 +98,7 @@ def main(model_name,label_map,path):
       # the array based representation of the image will be used later in order to prepare the
       # result image with boxes and labels on it.
   mx = 0
+  detected = ""
   for i in range(0,4):
     print("rotated image")
     image = image.transpose(Image.ROTATE_90)
@@ -108,7 +109,6 @@ def main(model_name,label_map,path):
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
       # Visualization of the results of a detection.
     cnt = 0
-    detected = ""
     for j in output_dict['detection_classes']:
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
