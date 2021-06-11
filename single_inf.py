@@ -99,7 +99,10 @@ def main(model_name,label_map,path):
       # result image with boxes and labels on it.
   mx = 0
   detected = ""
+  print("initialised")
+  print("starting loop")
   for i in range(0,4):
+    print("i:",i)
     print("rotated image")
     image = image.transpose(Image.ROTATE_90)
     image_np = load_image_into_numpy_array(image)
