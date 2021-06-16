@@ -12,12 +12,16 @@ from collections import defaultdict
 from io import StringIO
 from matplotlib import pyplot as plt
 from PIL import Image
-from object_detection.utils import ops as utils_ops
+try:
+  from object_detection.utils import label_map_util
+  from object_detection.utils import visualization_utils as vis_util
+  from object_detection.utils import ops as utils_ops
+except:
+  from DeepLogo.object_detection.utils import label_map_util
+  from DeepLogo.object_detection.utils import visualization_utils as vis_util
+  from DeepLogo.object_detection.utils import ops as utils_ops
 from numpy import asarray
 
-
-from object_detection.utils import label_map_util
-from object_detection.utils import visualization_utils as vis_util
 
 ##new load function
 def load_image_into_numpy_array(image):
