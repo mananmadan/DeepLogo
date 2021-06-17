@@ -143,7 +143,6 @@ def main_img(model_name,label_map,img):
       # result image with boxes and labels on it.
   mx = 0
   detected = ""
-  image = img
   image_np = load_image_into_numpy_array(image)
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
   image_np_expanded = np.expand_dims(image_np, axis=0)
