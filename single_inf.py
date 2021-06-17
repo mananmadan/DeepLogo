@@ -135,9 +135,10 @@ def main_img(model_name,label_map,img):
   # Size, in inches, of the output images.
   IMAGE_SIZE = (12, 8)
   file_dict = {}
-  #image_path = str(path)
+  cv2.imwrite("temp.jpg",img)
+  image_path = "temp.jpg"
     #print("opening image ..",image_path)
-  #image = Image.open(image_path)
+  image = Image.open(image_path)
       # the array based representation of the image will be used later in order to prepare the
       # result image with boxes and labels on it.
   mx = 0
