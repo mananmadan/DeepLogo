@@ -116,8 +116,8 @@ def main(model_name,label_map,path):
         detected = category_index[j]['name']
     cnt = cnt + 1
   return (detected,mx)
-
-def main_img(model_name,label_map,img):
+ 
+def pre(model_name,label_map):
   MODEL_NAME = model_name
   # Path to frozen detection graph. This is the actual model that is used for the object detection.
   PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
@@ -132,28 +132,31 @@ def main_img(model_name,label_map,img):
       tf.import_graph_def(od_graph_def, name='')
   category_index = label_map_util.create_category_index_from_labelmap(
     PATH_TO_LABELS, use_display_name=True)
+  return (category_index,detection_graph)
   # Size, in inches, of the output images.
+
+def main_img(category_index,detection_graph,img):
   IMAGE_SIZE = (12, 8)
   file_dict = {}
   cv2.imwrite("temp.jpg",img)
   image_path = "temp.jpg"
-    #print("opening image ..",image_path)
-  image = Image.open(image_path)
-      # the array based representation of the image will be used later in order to prepare the
-      # result image with boxes and labels on it.
-  mx = 0
-  detected = ""
-  image_np = load_image_into_numpy_array(image)
+  try:
+    image = Image.open(image_path)
+    mx = 0
+    detected = ""
+    image_np = load_image_into_numpy_array(image)
     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-  image_np_expanded = np.expand_dims(image_np, axis=0)
+    image_np_expanded = np.expand_dims(image_np, axis=0)
     # Actual detection.
-  output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
+    output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
-  cnt = 0
-  for j in output_dict['detection_classes']:
-    if output_dict['detection_scores'][cnt] > mx:
-        mx = output_dict['detection_scores'][cnt]
-        detected = category_index[j]['name']
-    cnt = cnt + 1
-  return (detected,mx)
+    cnt = 0
+    for j in output_dict['detection_classes']:
+      if output_dict['detection_scores'][cnt] > mx:
+          mx = output_dict['detection_scores'][cnt]
+          detected = category_index[j]['name']
+      cnt = cnt + 1
+    return (detected,mx)
+  except:
+    return ("",-1)
 
