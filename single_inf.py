@@ -171,6 +171,7 @@ def getallbox(category_index,detection_graph,img):
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
+    print("New")
     (im_width, im_height) = image.size
     cnt = 0
     print(image.size)
