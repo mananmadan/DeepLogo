@@ -173,7 +173,7 @@ def getallbox(category_index,detection_graph,img):
     # Visualization of the results of a detection.
     cnt = 0
     for j in output_dict['detection_classes']:
-      print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt])
+      print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt],"name",category_index[j]['name'])
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
           detected = category_index[j]['name']
