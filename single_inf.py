@@ -171,9 +171,14 @@ def getallbox(category_index,detection_graph,img):
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
+    (im_width, im_height) = image.size
     cnt = 0
+    print(image.size)
     for j in output_dict['detection_classes']:
       print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt],"name",category_index[j]['name'])
+      bb = [output_dict['detection_boxes'][cnt]]
+      timg = img[im_width*bb[0]:im_height*bb[2],im_height*bb[1]:im_height*bb[3],:]
+      cv2.imwrite(str(cnt)+".jpg",timg)
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
           detected = category_index[j]['name']
