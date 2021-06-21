@@ -177,7 +177,7 @@ def getallbox(category_index,detection_graph,img):
     for j in output_dict['detection_classes']:
       print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt],"name",category_index[j]['name'])
       bb = [output_dict['detection_boxes'][cnt]]
-      timg = img[im_width*bb[0]:im_height*bb[2],im_height*bb[1]:im_height*bb[3],:]
+      timg = img[im_width*bb[0]:im_width*bb[2],im_height*bb[1]:im_height*bb[3],:]
       cv2.imwrite(str(cnt)+".jpg",timg)
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
