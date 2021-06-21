@@ -181,6 +181,7 @@ def getallbox(category_index,detection_graph,img):
       [ymin,xmin,ymax,xmax] = bb
       (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
                                   ymin * im_height, ymax * im_height)
+      print(left,right,top,bottom)
       timg = img[left:right,top:bottom,:]
       cv2.imwrite(str(cnt)+".jpg",timg)
       if output_dict['detection_scores'][cnt] > mx:
