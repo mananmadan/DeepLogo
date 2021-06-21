@@ -11,7 +11,7 @@ from distutils.version import StrictVersion
 from collections import defaultdict
 from io import StringIO
 from matplotlib import pyplot as plt
-from PIL import Image
+from PIL import Image,ImageDraw
 try:
   from object_detection.utils import label_map_util
   from object_detection.utils import visualization_utils as vis_util
@@ -174,14 +174,14 @@ def getallbox(category_index,detection_graph,img):
     print("New")
     (im_width, im_height) = image.size
     cnt = 0
-    print(image.size)
+    print(img.size)
     for j in output_dict['detection_classes']:
       print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt],"name",category_index[j]['name'])
       bb = [output_dict['detection_boxes'][cnt]]
-      [xmin,xmax,ymin,ymax] = bb
+      [ymin,xmin,ymax,xmax] = bb
       (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
                                   ymin * im_height, ymax * im_height)
-      timg = img[top:bottom,left:right,:]
+      timg = img[left:right,top:bottom,:]
       cv2.imwrite(str(cnt)+".jpg",timg)
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
