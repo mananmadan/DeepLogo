@@ -179,7 +179,10 @@ def getallbox(category_index,detection_graph,img):
     for j in output_dict['detection_classes']:
       print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt],"name",category_index[j]['name'])
       bb = [output_dict['detection_boxes'][cnt]]
-      [ymin,xmin,ymax,xmax] = bb
+      ymin = bb[0][0]
+      xmin = bb[0][1]
+      ymax = bb[0][2]
+      xmax = bb[0][3]
       (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
                                   ymin * im_height, ymax * im_height)
       left = math.floor(left)
