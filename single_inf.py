@@ -171,7 +171,7 @@ def getallbox(category_index,detection_graph,img):
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
     # Visualization of the results of a detection.
-    print(output_dict)
+    print(output_dict['detection_classes'])
     cnt = 0
     for j in output_dict['detection_classes']:
       if output_dict['detection_scores'][cnt] > mx:
