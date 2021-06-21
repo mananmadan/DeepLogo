@@ -3,6 +3,7 @@ import numpy as np
 import os
 import sys
 import tarfile
+import math
 import tensorflow.compat.v1 as tf
 import zipfile
 import cv2
@@ -181,8 +182,14 @@ def getallbox(category_index,detection_graph,img):
       [ymin,xmin,ymax,xmax] = bb
       (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
                                   ymin * im_height, ymax * im_height)
+      left = math.floor(left)
+      right = math.ceil(right)
+      top = math.floor(top)
+      bottom = math.ceil(bottom)
+
       print(left,right,top,bottom)
-      timg = img[left:right,top:bottom,:]
+      ## segemented image
+      timg = img[top:bottom,left:right,:]
       cv2.imwrite(str(cnt)+".jpg",timg)
       if output_dict['detection_scores'][cnt] > mx:
           mx = output_dict['detection_scores'][cnt]
