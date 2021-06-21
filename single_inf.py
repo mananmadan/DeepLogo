@@ -136,8 +136,6 @@ def pre(model_name,label_map):
   # Size, in inches, of the output images.
 
 def main_img(category_index,detection_graph,img):
-  IMAGE_SIZE = (12, 8)
-  file_dict = {}
   cv2.imwrite("temp.jpg",img)
   image_path = "temp.jpg"
   try:
@@ -160,3 +158,26 @@ def main_img(category_index,detection_graph,img):
   except:
     return ("",-1)
 
+def getallbox(category_index,detection_graph,img):
+  cv2.imwrite("temp.jpg",img)
+  image_path = "temp.jpg"
+  try:
+    image = Image.open(image_path)
+    mx = 0
+    detected = ""
+    image_np = load_image_into_numpy_array(image)
+    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+    image_np_expanded = np.expand_dims(image_np, axis=0)
+    # Actual detection.
+    output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
+    # Visualization of the results of a detection.
+    print(output_dict)
+    cnt = 0
+    for j in output_dict['detection_classes']:
+      if output_dict['detection_scores'][cnt] > mx:
+          mx = output_dict['detection_scores'][cnt]
+          detected = category_index[j]['name']
+      cnt = cnt + 1
+    return (detected,mx)
+  except:
+    return ("",-1)
