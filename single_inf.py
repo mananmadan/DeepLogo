@@ -162,42 +162,32 @@ def main_img(category_index,detection_graph,img):
 def getallbox(category_index,detection_graph,img):
   cv2.imwrite("temp.jpg",img)
   image_path = "temp.jpg"
-  try:
-    image = Image.open(image_path)
-    mx = 0
-    detected = ""
-    image_np = load_image_into_numpy_array(image)
-    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
-    image_np_expanded = np.expand_dims(image_np, axis=0)
-    # Actual detection.
-    output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
-    # Visualization of the results of a detection.
-    print("New")
-    (im_width, im_height) = image.size
-    cnt = 0
-    print(img.size)
-    for j in output_dict['detection_classes']:
-      print("boxes",output_dict['detection_boxes'][cnt],"scores",output_dict['detection_scores'][cnt],"name",category_index[j]['name'])
-      bb = [output_dict['detection_boxes'][cnt]]
-      ymin = bb[0][0]
-      xmin = bb[0][1]
-      ymax = bb[0][2]
-      xmax = bb[0][3]
-      (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
-                                  ymin * im_height, ymax * im_height)
-      left = math.floor(left)
-      right = math.ceil(right)
-      top = math.floor(top)
-      bottom = math.ceil(bottom)
-
-      print(left,right,top,bottom)
-      ## segemented image
-      timg = img[top:bottom,left:right,:]
-      cv2.imwrite(str(cnt)+".jpg",timg)
-      if output_dict['detection_scores'][cnt] > mx:
-          mx = output_dict['detection_scores'][cnt]
-          detected = category_index[j]['name']
-      cnt = cnt + 1
-    return (detected,mx)
-  except:
-    return ("",-1)
+  image = Image.open(image_path)
+  mx = 0
+  detected = ""
+  image_np = load_image_into_numpy_array(image)
+  # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+  image_np_expanded = np.expand_dims(image_np, axis=0)
+  # Actual detection.
+  output_dict = run_inference_for_single_image(image_np_expanded, detection_graph)
+  # Visualization of the results of a detection.
+  print("New")
+  (im_width, im_height) = image.size
+  cnt = 0
+  print(img.size)
+  fullist = [[]]
+  for j in output_dict['detection_classes']:
+    bb = [output_dict['detection_boxes'][cnt]]
+    ymin = bb[0][0]
+    xmin = bb[0][1]
+    ymax = bb[0][2]
+    xmax = bb[0][3]
+    (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
+                                ymin * im_height, ymax * im_height)
+    left = math.floor(left)
+    right = math.ceil(right)
+    top = math.floor(top)
+    bottom = math.ceil(bottom)
+    cnt = cnt + 1
+    fullist.append([output_dict['detection_classes'][cnt],output_dict['detection_scores'][cnt],(left,right,top,bottom)])
+    return fullist
