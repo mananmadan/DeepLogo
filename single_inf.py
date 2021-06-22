@@ -175,7 +175,7 @@ def getallbox(category_index,detection_graph,img):
   (im_width, im_height) = image.size
   cnt = 0
   print(img.size)
-  fullist = [[]]
+  fullist = []
   for j in output_dict['detection_classes']:
     bb = [output_dict['detection_boxes'][cnt]]
     ymin = bb[0][0]
