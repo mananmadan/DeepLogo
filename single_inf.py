@@ -189,6 +189,6 @@ def getallbox(category_index,detection_graph,img):
     top = math.floor(top)
     bottom = math.ceil(bottom)
     cnt = cnt + 1
-    fullist.append([category_index[output_dict['detection_classes'][cnt]]['name'],output_dict['detection_scores'][cnt],(left,right,top,bottom)])
+    fullist.append([category_index[output_dict['detection_classes'][cnt]-1]['name'],output_dict['detection_scores'][cnt],(left,right,top,bottom)])
   
   return fullist
