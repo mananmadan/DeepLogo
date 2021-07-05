@@ -6,3 +6,7 @@
 - Total training images: 781
 - Total Testing images: 27
 - Accuracy of the model on the test set: 98.2%
+
+## Model Used
+- DeepLogo uses SSD as a backbone network and fine-tunes pre-trained SSD released in the tensorflow/models repository.
+- [SSD](https://arxiv.org/abs/1512.02325) 
