@@ -1,4 +1,3 @@
-
 import numpy as np
 import os
 import sys
@@ -24,7 +23,6 @@ except:
 from numpy import asarray
 
 
-##new load function
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
     if image.getdata().mode != "RGB":
@@ -33,6 +31,14 @@ def load_image_into_numpy_array(image):
     np_array = np.array(image.getdata())
     reshaped = np_array.reshape((im_height, im_width, 3))
     return reshaped.astype(np.uint8)
+
+
+"""
+Inference on single image
+----------------------------
+Input : Image and Tensorflow graph
+Output : Dict Containing boxes , scores , classes , masks
+"""
 def run_inference_for_single_image(image, graph):
   with graph.as_default():
     with tf.Session() as sess:
@@ -79,6 +85,13 @@ def run_inference_for_single_image(image, graph):
         output_dict['detection_masks'] = output_dict['detection_masks'][0]
   return output_dict
 
+
+"""
+Get the max detected logo and score
+-------------------------------------
+Input : model_name , label_map , path of the image
+Output : highest probability of the logo detected
+"""
 def main(model_name,label_map,path):
   MODEL_NAME = model_name
   # Path to frozen detection graph. This is the actual model that is used for the object detection.
@@ -118,6 +131,14 @@ def main(model_name,label_map,path):
     cnt = cnt + 1
   return (detected,mx)
  
+
+"""
+Get the graph and category_index
+----------------------------------
+Purpose : For detection in video , Generate the detection graph only once.
+Input : model_name , label_map
+Output : detection_graph and category_index
+"""
 def pre(model_name,label_map):
   MODEL_NAME = model_name
   # Path to frozen detection graph. This is the actual model that is used for the object detection.
@@ -135,6 +156,14 @@ def pre(model_name,label_map):
     PATH_TO_LABELS, use_display_name=True)
   return (category_index,detection_graph)
   # Size, in inches, of the output images.
+
+"""
+Get the detected logo and score (for video)
+----------------------------------
+Purpose : For detection in video.
+Input : category_index detection_graph img
+Output : detected_logo and score
+"""
 
 def main_img(category_index,detection_graph,img):
   cv2.imwrite("temp.jpg",img)
@@ -159,6 +188,13 @@ def main_img(category_index,detection_graph,img):
   except:
     return ("",-1)
 
+"""
+Get boxes score and name of all the logos detected in a frame
+---------------------------------------------------------------
+Purpose : For algo B
+Input : category_index detection_graph img
+Output : list of boxes , score , name of the logos detected in an image
+"""
 def getallbox(category_index,detection_graph,img):
   cv2.imwrite("temp.jpg",img)
   image_path = "temp.jpg"
