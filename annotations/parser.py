@@ -24,18 +24,18 @@ vis = {}
 trdict = {}
 tedict = {}
 for i in range(0,len(trclasses)):
-   cindex = int(trclasses[i])
+   cindex = cat_index[int(trclasses[i])]
    name = imgtr[i]
    if name in vis:
 	   continue
    vis[name] = 1
-   if int(cindex) not in trdict:
+   if cindex not in trdict:
 	   trdict[cindex] = 1
    else:
 	   trdict[cindex] = trdict[cindex]+1
 
 for i in range(0,len(teclasses)):
-   cindex = int(teclasses[i])
+   cindex = cat_index[int(teclasses[i])]
    name = imgte[i]
    if name in vis:
 	   continue
@@ -49,15 +49,22 @@ for i in range(0,len(teclasses)):
 sum = 0
 for i in trdict:
 	sum = sum + trdict[i]
-	print(cat_index[i],":",trdict[i])
+	print(i,":",trdict[i])
 print("Total training images:",sum)
 sum = 0
 for i in tedict:
 	sum  = sum + tedict[i]
 print("Total Testing images:",sum)
+
 ##Plot the graph
 plt.bar(*zip(*tedict.items()))
+##rotate text for visibililty
+plt.xticks(rotation='vertical')
 plt.show()
+
 plt.clf()
+
 plt.bar(*zip(*trdict.items()))
+##rotate text for visibililty
+plt.xticks(rotation='vertical')
 plt.show()
